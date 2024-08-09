@@ -21,4 +21,9 @@ export const ResponseMessage = {
     COMMENTS_FETCHED: "Comments fetched successfully",
     UNAUTHORIZED_ACCESS: "Unauthorized access",
     BLOG_DELETED: "Blogs deleted successfully",
+    BLOG_LIKED: "Blogs liked successfully",
+    BLOG_UNLIKED: "Blogs unliked successfully",
+    COMMENT_ADDED: "Comment added successfully",
+    BLOG_ID_REQUIRED: "Blogs ID required"
+
 }

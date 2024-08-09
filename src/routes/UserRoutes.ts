@@ -12,6 +12,9 @@ import {
   updateBlogController,
   getRecentBlogsController,
   deleteBlogController,
+  likeBlogController,
+  unlikeBlogController,
+  addCommentController,
 } from "../controller/user/BlogController";
 import Uploads from "../middleware/UploadFile";
 
@@ -30,5 +33,8 @@ UserRoutes.get("/get-my-blogs", Auth, getMyBlogs);
 UserRoutes.post("/update-blog", Auth, Uploads, updateBlogController);
 UserRoutes.get("/get-recent-blogs", Auth, getRecentBlogsController);
 UserRoutes.post("/delete-blog", Auth, deleteBlogController);
+UserRoutes.post("/like-blog", Auth, likeBlogController);
+UserRoutes.post("/unlike-blog", Auth, unlikeBlogController);
+UserRoutes.post("/add-comment-to-blog", Auth, addCommentController);
 
 export default UserRoutes;
