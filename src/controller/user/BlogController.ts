@@ -39,6 +39,31 @@ export const getAllBlogController : RequestHandler = async (req: CustomRequest, 
     }
 }
 
+export const getBlogById : RequestHandler = async (req: CustomRequest, res) => {
+    try {
+        const blogId = req.params.id;
+        const blogData = await Blog.findById(blogId).populate({
+            path: 'userId',
+            select: '-password',
+        }).populate({
+            path: "comments",
+            populate:{
+                path: "commentedBy",
+                select: "username image designation",
+            }
+        }) 
+        .lean() // add this to get a plain JavaScript object
+        .then((blog : any) => {
+            if(blog.comments){
+                blog.comments = blog.comments.sort((a :any, b : any) => b.createdAt - a.createdAt); // sort comments in descending order
+            }
+          return blog;
+        });;
+        return sendResponse(res, StatusCodes.OK, ResponseMessage.BLOGS_FETCHED, blogData);
+    } catch (error) {
+        return handleErrorResponse(res, error)
+    }
+}
 export const getMyBlogs : RequestHandler = async (req: CustomRequest, res) => {
     try {
         // const blogData = await Blog.find({userId: req.user}).populate('userId comments', '-password').sort({_id: -1})
